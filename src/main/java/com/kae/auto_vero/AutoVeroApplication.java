@@ -15,13 +15,14 @@ public class AutoVeroApplication {
 		String downloadsPath = Paths.get(basePath, "relatorios").toString();
 
 		System.out.println(basePath);
-		List<String> cnpjs = new ArrayList<>();
-		cnpjs.add("1");
-		cnpjs.add("2");
 
         try {
 			// criar a pasta de relatórios se não existir
 			FileManager.createDownloadsFolder(downloadsPath);
+
+			// ler cnpjs do excel
+			List<String> cnpjs = ExcelReader.readCnpjsFromExcel(excelPath);
+			System.out.println(cnpjs);
 
 			for (int i = 0; i < cnpjs.size(); i++) {
 				String cnpj = cnpjs.get(i);

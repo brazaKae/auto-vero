@@ -22,7 +22,11 @@ public class ExcelReader {
         for (Row row : sheet){
             Cell cell = row.getCell(0);
             if (cell != null) {
-                cnpjs.add(cell.getStringCellValue());
+                String cnpj = cell.getStringCellValue().replaceAll("[^0-9]", ""); // tira tudo que não for de 0 a 9
+
+                if(cnpj.length() == 14){
+                    cnpjs.add(cnpj);
+                }
             }
         }
 
