@@ -1,0 +1,28 @@
+package com.kae.auto_vero;
+
+
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AutoVeroApplication {
+
+	public static void main(String[] args) {
+
+		String basePath = System.getProperty("user.dir");
+		String excelPath = Paths.get(basePath, "cnpjs", "cnpjs.xlsx").toString();
+		String downloadsPath = Paths.get(basePath, "relatorios").toString();
+
+		System.out.println(basePath);
+		List<String> cnpjs = new ArrayList<>();
+		cnpjs.add("1");
+		cnpjs.add("2");
+
+		for (int i = 0; i < cnpjs.size(); i++) {
+			String cnpj = cnpjs.get(i);
+			SiteAutomation.downloadReport(cnpj, i + 1, downloadsPath);
+		}
+
+	}
+
+}
