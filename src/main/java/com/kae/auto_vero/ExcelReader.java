@@ -1,9 +1,6 @@
 package com.kae.auto_vero;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -22,7 +19,15 @@ public class ExcelReader {
         for (Row row : sheet){
             Cell cell = row.getCell(0);
             if (cell != null) {
-                String cnpj = cell.getStringCellValue().replaceAll("[^0-9]", ""); // tira tudo que não for de 0 a 9
+                String cnpj = "";
+
+                if(cell.getCellType() == CellType.STRING){
+                    cnpj = cell.getStringCellValue();
+                } else if (cell.getCellType() == CellType.NUMERIC) {
+                    cnpj = String.valueOf((long) cell.getNumericCellValue());
+                }
+
+                cnpj = cnpj.replaceAll("[^0-9]", "");
 
                 if(cnpj.length() == 14){
                     cnpjs.add(cnpj);
