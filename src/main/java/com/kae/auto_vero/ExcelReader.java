@@ -7,11 +7,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class ExcelReader {
-    public static List<String> readCnpjsFromExcel(String filePath) throws IOException {
-        List<String> cnpjs = new ArrayList<>();
+    public static ArrayList<String> readCnpjsFromExcel(String filePath) throws IOException {
+        HashSet<String> cnpjs = new HashSet<>();
         FileInputStream file = new FileInputStream(new File(filePath));
         Workbook workbook = new XSSFWorkbook(file);
         Sheet sheet = workbook.getSheetAt(0);
@@ -37,6 +39,6 @@ public class ExcelReader {
 
         workbook.close();
         file.close();
-        return cnpjs;
+        return new ArrayList<>(cnpjs);
     }
 }
