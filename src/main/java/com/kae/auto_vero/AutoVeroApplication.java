@@ -22,12 +22,9 @@ public class AutoVeroApplication {
 
 			// ler cnpjs do excel
 			List<String> cnpjs = ExcelReader.readCnpjsFromExcel(excelPath);
-			System.out.println(cnpjs);
 
-			for (int i = 0; i < cnpjs.size(); i++) {
-				String cnpj = cnpjs.get(i);
-				SiteAutomation.downloadReport(cnpj, i + 1, downloadsPath);
-			}
+			SiteAutomation.downloadReport(cnpjs, downloadsPath);
+
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);
